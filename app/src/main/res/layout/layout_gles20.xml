@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/glsurface_01"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/glsurface_02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/glsurface_01"
+        android:background="#22ff0000"/>
+
+</RelativeLayout>

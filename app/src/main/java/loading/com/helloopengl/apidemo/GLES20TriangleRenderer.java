@@ -39,11 +39,15 @@ import loading.com.helloopengl.utils.Loger;
 
 
 class GLES20TriangleRenderer implements GLSurfaceView.Renderer {
-    public GLES20TriangleRenderer(Context context) {
+    private boolean mBlock = false;
+
+    public GLES20TriangleRenderer(Context context, boolean block) {
         mContext = context;
         mTriangleVertices = ByteBuffer.allocateDirect(mTriangleVerticesData.length
                 * FLOAT_SIZE_BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();
         mTriangleVertices.put(mTriangleVerticesData).position(0);
+
+        mBlock = block;
     }
 
 //    private long lastDrawFrameTime = 0;
@@ -56,7 +60,7 @@ class GLES20TriangleRenderer implements GLSurfaceView.Renderer {
 //        Loger.d(TAG, "-->onDrawFrame(), duration=" + (currTime - lastDrawFrameTime));
 //        lastDrawFrameTime = currTime;
 
-        GLES20.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        GLES20.glClearColor(0.0f, mBlock ? 1 : 0.0f, mBlock ? 0 : 1.0f, 1.0f);
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
         GLES20.glUseProgram(mProgram);
         checkGlError("glUseProgram");
@@ -93,7 +97,9 @@ class GLES20TriangleRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(mMVPMatrix, 0, mProjMatrix, 0, mMVPMatrix, 0);
 
         GLES20.glUniformMatrix4fv(muMVPMatrixHandle, 1, false, mMVPMatrix, 0);
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+        if (!mBlock) {
+            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 3);
+        }
         checkGlError("glDrawArrays");
     }
 

@@ -23,26 +23,44 @@ import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
+import loading.com.helloopengl.R;
+import loading.com.helloopengl.utils.Loger;
+
 /**
  * This sample shows how to check for OpenGL ES 2.0 support at runtime, and then
  * use either OpenGL ES 1.0 or OpenGL ES 2.0, as appropriate.
  */
 public class GLES20Activity extends Activity {
+    private static final String TAG = "GLES20Activity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGLSurfaceView = new GLSurfaceView(this);
+
+        setContentView(R.layout.layout_gles20);
+        mGLSurfaceView = findViewById(R.id.glsurface_01);
+        mGLSurfaceView02 = findViewById(R.id.glsurface_02);
+        Loger.d(TAG, "dwz-->onCreate(), mGLSurfaceView=" + mGLSurfaceView + ", mGLSurfaceView02=" + mGLSurfaceView02);
+
+//        mGLSurfaceView = new GLSurfaceView(this);
         if (detectOpenGLES20()) {
             // Tell the surface view we want to create an OpenGL ES 2.0-compatible
             // context, and set an OpenGL ES 2.0-compatible renderer.
             mGLSurfaceView.setEGLContextClientVersion(2);
-            mGLSurfaceView.setRenderer(new GLES20TriangleRenderer(this));
+            mGLSurfaceView02.setEGLContextClientVersion(2);
+            GLES20TriangleRenderer renderer = new GLES20TriangleRenderer(this, false);
+            mGLSurfaceView.setRenderer(renderer);
+            GLES20TriangleRenderer renderer02 = new GLES20TriangleRenderer(this, true);
+            mGLSurfaceView02.setRenderer(renderer02);
         } else {
             // Set an OpenGL ES 1.x-compatible renderer. In a real application
             // this renderer might approximate the same output as the 2.0 renderer.
             mGLSurfaceView.setRenderer(new TriangleRenderer(this));
         }
-        setContentView(mGLSurfaceView);
+
+//        mGLSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        mGLSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+//        setContentView(mGLSurfaceView);
     }
 
     private boolean detectOpenGLES20() {
@@ -58,6 +76,7 @@ public class GLES20Activity extends Activity {
         // to take appropriate action when the activity looses focus
         super.onResume();
         mGLSurfaceView.onResume();
+        mGLSurfaceView02.onResume();
     }
 
     @Override
@@ -66,7 +85,9 @@ public class GLES20Activity extends Activity {
         // to take appropriate action when the activity looses focus
         super.onPause();
         mGLSurfaceView.onPause();
+        mGLSurfaceView02.onPause();
     }
 
     private GLSurfaceView mGLSurfaceView;
+    private GLSurfaceView mGLSurfaceView02;
 }
