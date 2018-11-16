@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AnimationView">
+        <attr name="fps" format="integer"/>
+        <attr name="split_orien">
+            <flag name="hor" value="1"/>
+            <flag name="ver" value="2"/>
+        </attr>
+        <attr name="enableHardwareDecode" format="boolean"/>
+    </declare-styleable>
+</resources>

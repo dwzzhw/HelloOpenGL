@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import loading.com.helloopengl.apidemo.GLES20Activity;
-import loading.com.helloopengl.inner.InnerGLESActivity;
+import loading.com.helloopengl.mp4animation.InnerGLESActivity;
 import loading.com.helloopengl.utils.Loger;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

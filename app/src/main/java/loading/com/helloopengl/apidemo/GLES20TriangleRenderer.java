@@ -123,6 +123,7 @@ class GLES20TriangleRenderer implements GLSurfaceView.Renderer {
         if (maPositionHandle == -1) {
             throw new RuntimeException("Could not get attrib location for aPosition");
         }
+
         maTextureHandle = GLES20.glGetAttribLocation(mProgram, "aTextureCoord");
         checkGlError("glGetAttribLocation aTextureCoord");
         if (maTextureHandle == -1) {
@@ -155,6 +156,7 @@ class GLES20TriangleRenderer implements GLSurfaceView.Renderer {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
 
         InputStream is = mContext.getResources()
+//                .openRawResource(R.raw.qq);
                 .openRawResource(R.raw.robot);
         Bitmap bitmap;
         try {
@@ -259,6 +261,7 @@ class GLES20TriangleRenderer implements GLSurfaceView.Renderer {
                     "uniform sampler2D bTexture;\n" +
                     "void main() {\n" +
                     "  gl_FragColor = texture2D(bTexture, vTextureCoord);\n" +
+//                    "  gl_FragColor = vec4(1, 0, 0, 1);\n" +
                     "}\n";
 
     private float[] mMVPMatrix = new float[16];

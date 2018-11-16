@@ -8,10 +8,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.Build;
 
-/**
- * Created by kuiweiwang on 2016/10/25.
- */
-
 public class DrawUtils {
     public static Paint CLEAR_PAINT;
     public static Rect RECT;

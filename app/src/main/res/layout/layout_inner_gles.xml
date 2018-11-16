@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/tips_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello Open GL ES."/>
+
+    <Button
+        android:id="@+id/render_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tips_view"
+        android:layout_marginTop="10dp"
+        android:text="Render"/>
+
+    <TextView
+        android:id="@+id/tips_view_2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/render_btn"
+        android:gravity="center"
+        android:text="Hello Open GL ES, I am background Tips."
+        android:textSize="30dp"/>
+
+    <loading.com.helloopengl.mp4animation.view.AnimationView
+        android:id="@+id/my_anim_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/render_btn"
+        app:enableHardwareDecode="true"/>
+
+    <TextureView
+        android:id="@+id/target_texture_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/render_btn"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

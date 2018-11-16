@@ -49,6 +49,7 @@ public class GLES20Activity extends Activity {
             mGLSurfaceView.setEGLContextClientVersion(2);
             mGLSurfaceView02.setEGLContextClientVersion(2);
             GLES20TriangleRenderer renderer = new GLES20TriangleRenderer(this, false);
+            mGLSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
             mGLSurfaceView.setRenderer(renderer);
             GLES20TriangleRenderer renderer02 = new GLES20TriangleRenderer(this, true);
             mGLSurfaceView02.setRenderer(renderer02);

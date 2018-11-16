@@ -6,10 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by loading on 3/14/17.
@@ -25,32 +23,33 @@ public class Utils {
     public static String readAssertResource(Context context, String strAssertFileName) {
         AssetManager assetManager = context.getAssets();
         String strResponse = "";
+        InputStream inputStream = null;
         try {
-            InputStream ims = assetManager.open(strAssertFileName);
-            strResponse = getStringFromInputStream(ims);
+            inputStream = assetManager.open(strAssertFileName);
+            strResponse = getStringFromInputStream(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return strResponse;
     }
 
-    private static String getStringFromInputStream(InputStream a_is) {
-        BufferedReader br = null;
+    private static String getStringFromInputStream(InputStream inputStream) {
         StringBuilder sb = new StringBuilder();
-        String line;
         try {
-            br = new BufferedReader(new InputStreamReader(a_is));
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
+            int length;
+            byte[] buffer = new byte[1024];
+            while ((length = inputStream.read(buffer)) != -1) {
+                sb.append(new String(buffer, 0, length));
             }
         } catch (IOException e) {
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                }
-            }
         }
         return sb.toString();
     }
